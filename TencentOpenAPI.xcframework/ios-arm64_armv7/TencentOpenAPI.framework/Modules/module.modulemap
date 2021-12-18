@@ -1,0 +1,7 @@
+framework module TencentOpenAPI {
+  header "QQApiInterface.h"
+  header "QQApiInterfaceObject.h"
+  header "sdkdef.h"
+  header "TencentOAuth.h"
+  export *
+}
