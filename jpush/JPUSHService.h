@@ -11,7 +11,7 @@
 
 #define JPUSH_VERSION_NUMBER 3.3.6
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @class CLRegion;
 @class UILocalNotification;

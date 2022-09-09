@@ -17,7 +17,7 @@
  */
 
 #include "wav.h"
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 void WavWriter::writeString(const char *str) {
     fputc(str[0], wav);

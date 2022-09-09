@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-@import AVFoundation;
-@import Foundation;
+#import <AVFoundation/AVFoundation.h>
+#import <Foundation/Foundation.h>
 #import "LYHAMRConverter.h"
 #import "NarrowBandWavToAmr.h"
 

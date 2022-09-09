@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 SINA iOS Team. All rights reserved.
 //
 
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #pragma mark - WBHttpRequest and WBHttpRequestDelegate
 @class WBHttpRequest;

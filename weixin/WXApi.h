@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 Tencent. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import "WXApiObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
