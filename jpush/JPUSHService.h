@@ -25,6 +25,8 @@
 @protocol JPUSHGeofenceDelegate;
 @protocol JPUSHNotiInMessageDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^JPUSHTagsOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq);
 typedef void (^JPUSHTagValidOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind);
 typedef void (^JPUSHAliasOperationCompletion)(NSInteger iResCode, NSString *iAlias, NSInteger seq);
@@ -200,9 +202,9 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setupWithOption:(NSDictionary *)launchingOption
                  appKey:(NSString *)appKey
-                channel:(NSString *)channel
+                channel:(nullable NSString *)channel
        apsForProduction:(BOOL)isProduction
-  advertisingIdentifier:(NSString *)advertisingId;
+  advertisingIdentifier:(nullable NSString *)advertisingId;
 
 
 ///----------------------------------------------------
@@ -361,7 +363,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)deleteAlias:(JPUSHAliasOperationCompletion)completion
++ (void)deleteAlias:(nullable JPUSHAliasOperationCompletion)completion
                 seq:(NSInteger)seq;
 
 /**
@@ -854,3 +856,5 @@ callbackSelector:(SEL)cbSelector
 - (void)jPushNotiInMessageDidClickWithContent:(NSDictionary *)content;
 
 @end
+
+NS_ASSUME_NONNULL_END
