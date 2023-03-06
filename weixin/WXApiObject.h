@@ -137,9 +137,9 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @interface BaseReq : NSObject
 
 /** 请求类型 */
-@property (nonatomic, assign) int type;
+@property(nonatomic, assign) int type;
 /** 由用户微信号和AppID组成的唯一标识，需要校验微信用户是否换号登录时填写*/
-@property (nonatomic, copy) NSString *openID;
+@property(nonatomic, copy) NSString *openID;
 
 @end
 
@@ -151,11 +151,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 @interface BaseResp : NSObject
 /** 错误码 */
-@property (nonatomic, assign) int errCode;
+@property(nonatomic, assign) int errCode;
 /** 错误提示字符串 */
-@property (nonatomic, copy) NSString *errStr;
+@property(nonatomic, copy) NSString *errStr;
 /** 响应类型 */
-@property (nonatomic, assign) int type;
+@property(nonatomic, assign) int type;
 
 @end
 
@@ -177,20 +177,20 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @see SendAuthResp
  * @note scope字符串长度不能超过1K
  */
-@property (nonatomic, copy) NSString *scope;
+@property(nonatomic, copy) NSString *scope;
 /** 第三方程序本身用来标识其请求的唯一性，最后跳转回第三方程序时，由微信终端回传。
  * @note state字符串长度不能超过1K
  */
-@property (nonatomic, copy) NSString *state;
+@property(nonatomic, copy) NSString *state;
 
-@property (nonatomic, assign) BOOL isOption1;
+@property(nonatomic, assign) BOOL isOption1;
 
 /** 是否关闭自动授权
  * @note YES为关闭自动授权，每次登陆都需要用户手动授权；NO为允许自动授权
  */
-@property (nonatomic, assign) BOOL nonautomatic;
+@property(nonatomic, assign) BOOL nonautomatic;
 
-@property (nonatomic, copy) NSString *extData;
+@property(nonatomic, copy) NSString *extData;
 
 @end
 
@@ -202,13 +202,13 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @see onResp
  */
 @interface SendAuthResp : BaseResp
-@property (nonatomic, copy, nullable) NSString *code;
+@property(nullable, nonatomic, copy) NSString *code;
 /** 第三方程序发送时用来标识其请求的唯一性的标志，由第三方程序调用sendReq时传入，由微信终端回传
  * @note state字符串长度不能超过1K
  */
-@property (nonatomic, copy, nullable) NSString *state;
-@property (nonatomic, copy, nullable) NSString *lang;
-@property (nonatomic, copy, nullable) NSString *country;
+@property(nullable, nonatomic, copy) NSString *state;
+@property(nullable, nonatomic, copy) NSString *lang;
+@property(nullable, nonatomic, copy) NSString *country;
 @end
 
 #pragma mark - WXStateJumpInfo
@@ -225,7 +225,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 跳转到指定的url
  * @note 必填，url长度必须大于0且小于10K
  */
-@property (nonatomic, copy) NSString *url;
+@property(nonatomic, copy) NSString *url;
 
 @end
 
@@ -236,17 +236,17 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 小程序username
  * @note 必填
  */
-@property (nonatomic, copy) NSString *username;
+@property(nonatomic, copy) NSString *username;
 
 /** 小程序页面的路径
  * @attention 不填默认拉起小程序首页
  */
-@property (nonatomic, copy, nullable) NSString *path;
+@property(nullable, nonatomic, copy) NSString *path;
 
 /** 分享小程序的版本
  * @attention （正式，开发，体验）
  */
-@property (nonatomic, assign) WXMiniProgramType miniProgramType;
+@property(nonatomic, assign) WXMiniProgramType miniProgramType;
 
 @end
 
@@ -259,7 +259,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 视频号username
  * @note 必填，username长度必须大于0且小于1K
  */
-@property (nonatomic, copy) NSString *username;
+@property(nonatomic, copy) NSString *username;
 
 
 @end
@@ -280,19 +280,19 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 状态标志的ID
  * @note 选填，文本长度必须小于10K
  */
-@property (nonatomic, copy) NSString *stateId;
+@property(nonatomic, copy) NSString *stateId;
 /** 状态发表时附带的文本描述
  * @note 选填，文本长度必须小于10K
  */
-@property (nonatomic, copy) NSString *stateTitle;
+@property(nonatomic, copy) NSString *stateTitle;
 /** 后台校验token
  * @note 选填，文本长度必须小于10K
  */
-@property (nonatomic, copy) NSString *token;
+@property(nonatomic, copy) NSString *token;
 /** 小尾巴跳转所需的信息
  * @note 必填，目前仅支持url跳转
  */
-@property (nonatomic, strong) WXStateJumpInfo *stateJumpDataInfo;
+@property(nonatomic, strong) WXStateJumpInfo *stateJumpDataInfo;
 
 @end
 
@@ -307,25 +307,25 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 发送消息的文本内容
  * @note 文本长度必须大于0且小于10K
  */
-@property (nonatomic, copy) NSString *text;
+@property(nonatomic, copy) NSString *text;
 /** 发送消息的多媒体内容
  * @see WXMediaMessage
  */
-@property (nonatomic, strong) WXMediaMessage *message;
+@property(nonatomic, strong) WXMediaMessage *message;
 /** 发送消息的类型，包括文本消息和多媒体消息两种，两者只能选择其一，不能同时发送文本和多媒体消息 */
-@property (nonatomic, assign) BOOL bText;
+@property(nonatomic, assign) BOOL bText;
 /** 发送的目标场景，可以选择发送到会话(WXSceneSession)或者朋友圈(WXSceneTimeline)。 默认发送到会话。
  * @see WXScene
  */
-@property (nonatomic, assign) int scene;
+@property(nonatomic, assign) int scene;
 /** 指定发送消息的人
  * @note WXSceneSpecifiedSession时有效
  */
-@property (nonatomic, copy, nullable) NSString *toUserOpenId;
+@property(nullable, nonatomic, copy) NSString *toUserOpenId;
 /** 目标场景附带信息
  * @note 目前只针对状态场景
  */
-@property (nonatomic, strong) WXSceneDataObject *sceneDataObject;
+@property(nonatomic, strong) WXSceneDataObject *sceneDataObject;
 
 @end
 
@@ -346,8 +346,8 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 需要第三方程序调用sendResp返回一个GetMessageFromWXResp消息结构体。
  */
 @interface GetMessageFromWXReq : BaseReq
-@property (nonatomic, strong) NSString *lang;
-@property (nonatomic, strong) NSString *country;
+@property(nonatomic, strong) NSString *lang;
+@property(nonatomic, strong) NSString *country;
 @end
 
 
@@ -361,13 +361,13 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 向微信终端提供的文本内容
  @note 文本长度必须大于0且小于10K
  */
-@property (nonatomic, strong) NSString *text;
+@property(nonatomic, strong) NSString *text;
 /** 向微信终端提供的多媒体内容。
  * @see WXMediaMessage
  */
-@property (nonatomic, strong) WXMediaMessage *message;
+@property(nonatomic, strong) WXMediaMessage *message;
 /** 向微信终端提供内容的消息类型，包括文本消息和多媒体消息两种，两者只能选择其一，不能同时发送文本和多媒体消息 */
-@property (nonatomic, assign) BOOL bText;
+@property(nonatomic, assign) BOOL bText;
 @end
 
 
@@ -382,9 +382,9 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 微信终端向第三方程序发送的要求第三方程序处理的多媒体内容
  * @see WXMediaMessage
  */
-@property (nonatomic, strong) WXMediaMessage *message;
-@property (nonatomic, copy) NSString *lang;
-@property (nonatomic, copy) NSString *country;
+@property(nonatomic, strong) WXMediaMessage *message;
+@property(nonatomic, copy) NSString *lang;
+@property(nonatomic, copy) NSString *country;
 @end
 
 
@@ -405,9 +405,9 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *  微信向第三方发送的结构体，第三方不需要返回
  */
 @interface LaunchFromWXReq : BaseReq
-@property (nonatomic, strong) WXMediaMessage *message;
-@property (nonatomic, copy) NSString *lang;
-@property (nonatomic, copy) NSString *country;
+@property(nonatomic, strong) WXMediaMessage *message;
+@property(nonatomic, copy) NSString *lang;
+@property(nonatomic, copy) NSString *country;
 @end
 
 
@@ -445,12 +445,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 网页业务类型
  * @attention
  */
-@property (nonatomic, assign) UInt32 businessType;
+@property(nonatomic, assign) UInt32 businessType;
 
 /** 网页业务参数
  * @attention
  */
-@property (nonatomic, strong, nullable) NSDictionary *queryInfoDic;
+@property(nullable, nonatomic, strong) NSDictionary *queryInfoDic;
 
 @end
 
@@ -463,12 +463,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 第三方程序自定义简单数据，微信终端会回传给第三方程序处理
  * @attention 长度不能超过2k
  */
-@property (nonatomic, copy) NSString *result;
+@property(nonatomic, copy) NSString *result;
 
 /** 网页业务类型
  * @attention
  */
-@property (nonatomic, assign) UInt32 businessType;
+@property(nonatomic, assign) UInt32 businessType;
 
 @end
 
@@ -498,23 +498,23 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 卡id
  * @attention 长度不能超过1024字节
  */
-@property (nonatomic, copy) NSString *cardId;
+@property(nonatomic, copy) NSString *cardId;
 /** ext信息
  * @attention 长度不能超过2024字节
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 /**
  * @attention 卡的状态,req不需要填。resp:0为未添加，1为已添加。
  */
-@property (nonatomic, assign) UInt32 cardState;
+@property(nonatomic, assign) UInt32 cardState;
 /**
  * @attention req不需要填，chooseCard返回的。
  */
-@property (nonatomic, copy) NSString *encryptCode;
+@property(nonatomic, copy) NSString *encryptCode;
 /**
  * @attention req不需要填，chooseCard返回的。
  */
-@property (nonatomic, copy) NSString *appID;
+@property(nonatomic, copy) NSString *appID;
 @end;
 
 #pragma mark - WXInvoiceItem
@@ -523,23 +523,23 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 卡id
  * @attention 长度不能超过1024字节
  */
-@property (nonatomic, copy) NSString *cardId;
+@property(nonatomic, copy) NSString *cardId;
 /** ext信息
  * @attention 长度不能超过2024字节
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 /**
  * @attention 卡的状态,req不需要填。resp:0为未添加，1为已添加。
  */
-@property (nonatomic, assign) UInt32 cardState;
+@property(nonatomic, assign) UInt32 cardState;
 /**
  * @attention req不需要填，chooseCard返回的。
  */
-@property (nonatomic, copy) NSString *encryptCode;
+@property(nonatomic, copy) NSString *encryptCode;
 /**
  * @attention req不需要填，chooseCard返回的。
  */
-@property (nonatomic, copy) NSString *appID;
+@property(nonatomic, copy) NSString *appID;
 
 @end
 
@@ -552,7 +552,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 卡列表
  * @attention 个数不能超过40个 类型WXCardItem
  */
-@property (nonatomic, strong) NSArray *cardAry;
+@property(nonatomic, strong) NSArray *cardAry;
 
 @end
 
@@ -566,7 +566,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 卡列表
  * @attention 个数不能超过40个 类型WXCardItem
  */
-@property (nonatomic, strong) NSArray *cardAry;
+@property(nonatomic, strong) NSArray *cardAry;
 @end
 
 #pragma mark - WXChooseCardReq
@@ -575,15 +575,15 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 
 @interface WXChooseCardReq : BaseReq
-@property (nonatomic, copy) NSString *appID;
-@property (nonatomic, assign) UInt32 shopID;
-@property (nonatomic, assign) UInt32 canMultiSelect;
-@property (nonatomic, copy) NSString *cardType;
-@property (nonatomic, copy) NSString *cardTpID;
-@property (nonatomic, copy) NSString *signType;
-@property (nonatomic, copy) NSString *cardSign;
-@property (nonatomic, assign) UInt32 timeStamp;
-@property (nonatomic, copy) NSString *nonceStr;
+@property(nonatomic, copy) NSString *appID;
+@property(nonatomic, assign) UInt32 shopID;
+@property(nonatomic, assign) UInt32 canMultiSelect;
+@property(nonatomic, copy) NSString *cardType;
+@property(nonatomic, copy) NSString *cardTpID;
+@property(nonatomic, copy) NSString *signType;
+@property(nonatomic, copy) NSString *cardSign;
+@property(nonatomic, assign) UInt32 timeStamp;
+@property(nonatomic, copy) NSString *nonceStr;
 @end
 
 
@@ -593,7 +593,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 
 @interface WXChooseCardResp : BaseResp
-@property (nonatomic, strong ) NSArray* cardAry;
+@property(nonatomic, strong ) NSArray* cardAry;
 @end
 
 
@@ -602,12 +602,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 @interface WXChooseInvoiceReq : BaseReq
-@property (nonatomic, copy) NSString *appID;
-@property (nonatomic, assign) UInt32 shopID;
-@property (nonatomic, copy) NSString *signType;
-@property (nonatomic, copy) NSString *cardSign;
-@property (nonatomic, assign) UInt32 timeStamp;
-@property (nonatomic, copy) NSString *nonceStr;
+@property(nonatomic, copy) NSString *appID;
+@property(nonatomic, assign) UInt32 shopID;
+@property(nonatomic, copy) NSString *signType;
+@property(nonatomic, copy) NSString *cardSign;
+@property(nonatomic, assign) UInt32 timeStamp;
+@property(nonatomic, copy) NSString *nonceStr;
 @end
 
 #pragma mark - WXChooseInvoiceResp
@@ -615,24 +615,24 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 @interface WXChooseInvoiceResp : BaseResp
-@property (nonatomic, strong) NSArray* cardAry;
+@property(nonatomic, strong) NSArray* cardAry;
 @end
 
 #pragma mark - WXSubscriptionReq
 @interface WXSubscribeMsgReq : BaseReq
-@property (nonatomic, assign) UInt32 scene;
-@property (nonatomic, copy) NSString *templateId;
-@property (nonatomic, copy, nullable) NSString *reserved;
+@property(nonatomic, assign) UInt32 scene;
+@property(nonatomic, copy) NSString *templateId;
+@property(nullable, nonatomic, copy) NSString *reserved;
 @end
 
 #pragma mark - WXSubscriptionReq
 @interface WXSubscribeMsgResp : BaseResp
 
-@property (nonatomic, copy) NSString *templateId;
-@property (nonatomic, assign) UInt32 scene;
-@property (nonatomic, copy) NSString *action;
-@property (nonatomic, copy) NSString *reserved;
-@property (nonatomic, copy, nullable) NSString *openId;
+@property(nonatomic, copy) NSString *templateId;
+@property(nonatomic, assign) UInt32 scene;
+@property(nonatomic, copy) NSString *action;
+@property(nonatomic, copy) NSString *reserved;
+@property(nullable, nonatomic, copy) NSString *openId;
 
 @end
 
@@ -641,7 +641,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 @interface WXSubscribeMiniProgramMsgReq : BaseReq
-@property (nonatomic, copy) NSString *miniProgramAppid;
+@property(nonatomic, copy) NSString *miniProgramAppid;
 @end
 
 #pragma mark - WXSubscriptionReq
@@ -656,7 +656,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 #pragma mark - WXinvoiceAuthInsertReq
 @interface WXInvoiceAuthInsertReq : BaseReq
 
-@property (nonatomic, copy) NSString *urlString;
+@property(nonatomic, copy) NSString *urlString;
 
 @end
 
@@ -664,7 +664,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 @interface WXInvoiceAuthInsertResp : BaseResp
 
-@property (nonatomic, copy) NSString *wxOrderId;
+@property(nonatomic, copy) NSString *wxOrderId;
 
 @end
 
@@ -681,38 +681,38 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 标题
  * @note 长度不能超过512字节
  */
-@property (nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *title;
 /** 描述内容
  * @note 长度不能超过1K
  */
-@property (nonatomic, copy) NSString *description;
+@property(nonatomic, copy) NSString *description;
 /** 缩略图数据
  * @note 大小不能超过64K
  */
-@property (nonatomic, strong, nullable) NSData *thumbData;
+@property(nullable, nonatomic, strong) NSData *thumbData;
 /**
  * @note 长度不能超过64字节
  */
-@property (nonatomic, copy, nullable) NSString *mediaTagName;
+@property(nullable, nonatomic, copy) NSString *mediaTagName;
 /**
  *
  */
-@property (nonatomic, copy, nullable) NSString *messageExt;
-@property (nonatomic, copy, nullable) NSString *messageAction;
+@property(nullable, nonatomic, copy) NSString *messageExt;
+@property(nullable, nonatomic, copy) NSString *messageAction;
 /**
  * 多媒体数据对象，可以为WXImageObject，WXMusicObject，WXVideoObject，WXWebpageObject等。
  */
-@property (nonatomic, strong) id mediaObject;
+@property(nonatomic, strong) id mediaObject;
 
 /** 缩略图的hash值
  * @note 使用sha256得到，用于计算签名
  */
-@property (nonatomic, copy, nullable) NSString *thumbDataHash;
+@property(nullable, nonatomic, copy) NSString *thumbDataHash;
 
 /** 消息签名
  * @note 用于校验消息体是否被篡改过
  */
-@property (nonatomic, copy, nullable) NSString *msgSignature;
+@property(nullable, nonatomic, copy) NSString *msgSignature;
 
 
 /*! @brief 设置消息缩略图的方法
@@ -743,12 +743,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 图片真实数据内容
  * @note 大小不能超过25M
  */
-@property (nonatomic, strong) NSData *imageData;
+@property(nonatomic, strong) NSData *imageData;
 
 /** 图片数据的hash值
  * @note 使用sha256得到，用于计算签名
  */
-@property (nonatomic, copy, nullable) NSString *imgDataHash;
+@property(nullable, nonatomic, copy) NSString *imgDataHash;
 
 @end
 
@@ -770,30 +770,30 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 音乐网页的url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *musicUrl;
+@property(nonatomic, copy) NSString *musicUrl;
 /** 音乐lowband网页的url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *musicLowBandUrl;
+@property(nonatomic, copy) NSString *musicLowBandUrl;
 /** 音乐数据url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *musicDataUrl;
+@property(nonatomic, copy) NSString *musicDataUrl;
 
 /**音乐lowband数据url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *musicLowBandDataUrl;
+@property(nonatomic, copy) NSString *musicLowBandDataUrl;
 
 /**音乐封面图Url
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *songAlbumUrl;
+@property(nonatomic, copy) NSString *songAlbumUrl;
 
 /**歌词信息 LRC格式
  * @note 长度不能超过32K
  */
-@property (nonatomic, copy, nullable) NSString *songLyric;
+@property(nullable, nonatomic, copy) NSString *songLyric;
 @end
 
 
@@ -805,7 +805,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /**付费歌曲的id
  * @note 长度不能超过32K
  */
-@property (nonatomic, copy) NSString *musicId;
+@property(nonatomic, copy) NSString *musicId;
 
 @end
 
@@ -821,67 +821,67 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 音乐网页的url地址
  * @note 长度不能超过10K，不能为空
  */
-@property (nonatomic, copy) NSString *musicUrl;
+@property(nonatomic, copy) NSString *musicUrl;
 
 /** 音乐数据url地址
  * @note 长度不能超过10K，不能为空
  */
-@property (nonatomic, copy) NSString *musicDataUrl;
+@property(nonatomic, copy) NSString *musicDataUrl;
 
 /**歌手名
  * @note 长度不能超过1k，不能为空
  */
-@property (nonatomic, copy) NSString *singerName;
+@property(nonatomic, copy) NSString *singerName;
 
 /**
  * @note 音乐时长, 单位毫秒
  */
-@property (nonatomic, assign) UInt32 duration;
+@property(nonatomic, assign) UInt32 duration;
 
 /**歌词信息 LRC格式
  * @note 长度不能超过32K
  */
-@property (nonatomic, copy) NSString *songLyric;
+@property(nonatomic, copy) NSString *songLyric;
 
 /**高清封面图
  * @note 大小不能超过1M
  */
-@property (nonatomic, strong) NSData *hdAlbumThumbData;
+@property(nonatomic, strong) NSData *hdAlbumThumbData;
 
 /** 高清封面图数据的hash值
  * @note 使用sha256得到，用于计算签名
  */
-@property (nonatomic, copy, nullable) NSString *hdAlbumThumbFileHash;
+@property(nullable, nonatomic, copy) NSString *hdAlbumThumbFileHash;
 
 /**音乐专辑名称
  * @note 长度不能超过1k
  */
-@property (nonatomic, copy, nullable) NSString *albumName;
+@property(nullable, nonatomic, copy) NSString *albumName;
 
 /**音乐流派
  * @note 长度不能超过1k
  */
-@property (nonatomic, copy, nullable) NSString *musicGenre;
+@property(nullable, nonatomic, copy) NSString *musicGenre;
 
 /**发行时间
  * @note Unix时间戳，单位为秒
  */
-@property (nonatomic, assign) UInt64 issueDate;
+@property(nonatomic, assign) UInt64 issueDate;
 
 /**音乐标识符
  * @note 长度不能超过1K，从微信跳回应用时会带上
  */
-@property (nonatomic, copy, nullable) NSString *identification;
+@property(nullable, nonatomic, copy) NSString *identification;
 
 /**运营H5地址
  * @note 选填，建议填写，用户进入歌曲详情页将展示内嵌的运营H5，可展示该歌曲的相关评论、歌曲推荐等内容，不可诱导下载、分享等。
  */
-@property (nonatomic, copy, nullable) NSString *musicOperationUrl;
+@property(nullable, nonatomic, copy) NSString *musicOperationUrl;
 
 /** 付费歌曲相关信息
  * @note 选填，如果歌曲是需要付费的，那么将付费歌曲id等信息封装在内。
  */
-@property (nonatomic, strong) WXMusicVipInfo *musicVipInfo;
+@property(nonatomic, strong) WXMusicVipInfo *musicVipInfo;
 
 @end
 
@@ -904,11 +904,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 视频网页的url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *videoUrl;
+@property(nonatomic, copy) NSString *videoUrl;
 /** 视频lowband网页的url地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *videoLowBandUrl;
+@property(nonatomic, copy) NSString *videoLowBandUrl;
 
 @end
 
@@ -930,14 +930,14 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 网页的url地址
  * @note 不能为空且长度不能超过10K
  */
-@property (nonatomic, copy) NSString *webpageUrl;
+@property(nonatomic, copy) NSString *webpageUrl;
 
 /**是否是私密消息
  */
-@property (nonatomic, assign) BOOL isSecretMessage;
+@property(nonatomic, assign) BOOL isSecretMessage;
 
 /** 业务所需的额外信息 */
-@property (nonatomic, strong, nullable) NSDictionary *extraInfoDic;
+@property(nullable, nonatomic, strong) NSDictionary *extraInfoDic;
 
 @end
 
@@ -961,15 +961,15 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 若第三方程序不存在，微信终端会打开该url所指的App下载地址
  * @note 长度不能超过10K
  */
-@property (nonatomic, copy) NSString *url;
+@property(nonatomic, copy) NSString *url;
 /** 第三方程序自定义简单数据，微信终端会回传给第三方程序处理
  * @note 长度不能超过2K
  */
-@property (nonatomic, copy, nullable) NSString *extInfo;
+@property(nullable, nonatomic, copy) NSString *extInfo;
 /** App文件数据，该数据发送给微信好友，微信好友需要点击后下载数据，微信终端会回传给第三方程序处理
  * @note 大小不能超过10M
  */
-@property (nonatomic, strong, nullable) NSData *fileData;
+@property(nullable, nonatomic, strong) NSData *fileData;
 
 @end
 
@@ -992,7 +992,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 表情真实数据内容
  * @note 大小不能超过10M
  */
-@property (nonatomic, strong) NSData *emoticonData;
+@property(nonatomic, strong) NSData *emoticonData;
 
 @end
 
@@ -1014,12 +1014,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 文件后缀名
  * @note 长度不超过64字节
  */
-@property (nonatomic, copy) NSString *fileExtension;
+@property(nonatomic, copy) NSString *fileExtension;
 
 /** 文件真实数据内容
  * @note 大小不能超过10M
  */
-@property (nonatomic, strong) NSData *fileData;
+@property(nonatomic, strong) NSData *fileData;
 
 @end
 
@@ -1041,8 +1041,8 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 地理位置信息
  * @note 经纬度
  */
-@property (nonatomic, assign) double lng; //经度
-@property (nonatomic, assign) double lat; //纬度
+@property(nonatomic, assign) double lng; //经度
+@property(nonatomic, assign) double lat; //纬度
 
 @end
 
@@ -1063,7 +1063,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 地理位置信息
  * @note 文本内容
  */
-@property (nonatomic, copy) NSString *contentText;
+@property(nonatomic, copy) NSString *contentText;
 
 @end
 
@@ -1080,39 +1080,39 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** 低版本网页链接
  * @attention 长度不能超过1024字节
  */
-@property (nonatomic, copy) NSString *webpageUrl;
+@property(nonatomic, copy) NSString *webpageUrl;
 
 /** 小程序username */
-@property (nonatomic, copy) NSString *userName;
+@property(nonatomic, copy) NSString *userName;
 
 /** 小程序页面的路径
  * @attention 不填默认拉起小程序首页
  */
-@property (nonatomic, copy, nullable) NSString *path;
+@property(nullable, nonatomic, copy) NSString *path;
 
 /** 小程序新版本的预览图
  * @attention 大小不能超过128k
  */
-@property (nonatomic, strong, nullable) NSData *hdImageData;
+@property(nullable, nonatomic, strong) NSData *hdImageData;
 
 /** 是否使用带 shareTicket 的转发 */
-@property (nonatomic, assign) BOOL withShareTicket;
+@property(nonatomic, assign) BOOL withShareTicket;
 
 /** 分享小程序的版本
  * @attention （正式，开发，体验）
  */
-@property (nonatomic, assign) WXMiniProgramType miniProgramType;
+@property(nonatomic, assign) WXMiniProgramType miniProgramType;
 
 /** 是否禁用转发 */
-@property (nonatomic, assign) BOOL disableForward;
+@property(nonatomic, assign) BOOL disableForward;
 
-@property (nonatomic, assign) BOOL isUpdatableMessage;
+@property(nonatomic, assign) BOOL isUpdatableMessage;
 
-@property (nonatomic, assign) BOOL isSecretMessage;
+@property(nonatomic, assign) BOOL isSecretMessage;
 
 
 /** 业务所需的额外信息 */
-@property (nonatomic, strong, nullable) NSDictionary *extraInfoDic;
+@property(nullable, nonatomic, strong) NSDictionary *extraInfoDic;
 
 @end
 
@@ -1128,7 +1128,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 + (WXGameLiveObject *)object;
 
 /** 业务所需的额外信息 */
-@property (nonatomic, strong, nullable) NSDictionary *extraInfoDic;
+@property(nullable, nonatomic, strong) NSDictionary *extraInfoDic;
 
 @end
 
@@ -1143,27 +1143,27 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 + (WXLaunchMiniProgramReq *)object;
 
 /** 小程序username */
-@property (nonatomic, copy) NSString *userName;
+@property(nonatomic, copy) NSString *userName;
 
 /** 小程序页面的路径
  * @attention 不填默认拉起小程序首页
  */
-@property (nonatomic, copy, nullable) NSString *path;
+@property(nullable, nonatomic, copy) NSString *path;
 
 /** 分享小程序的版本
  * @attention （正式，开发，体验）
  */
-@property (nonatomic, assign) WXMiniProgramType miniProgramType;
+@property(nonatomic, assign) WXMiniProgramType miniProgramType;
 
 /** ext信息
  * @attention json格式
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 
 /** extDic
  * @attention 字典，可存放图片等比较大的数据
  */
-@property (nonatomic, copy, nullable) NSDictionary *extDic;
+@property(nullable, nonatomic, copy) NSDictionary *extDic;
 
 @end
 
@@ -1174,7 +1174,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 @interface WXLaunchMiniProgramResp : BaseResp
 
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 
 @end
 
@@ -1191,21 +1191,21 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /** 业务类型
  */
-@property (nonatomic, copy) NSString *businessType;
+@property(nonatomic, copy) NSString *businessType;
 
 /** 业务参数
  */
-@property (nonatomic, copy, nullable) NSString *query;
+@property(nullable, nonatomic, copy) NSString *query;
 
 /** ext信息
  * @note 选填，json格式
  */
-@property (nonatomic, copy, nullable) NSString *extInfo;
+@property(nullable, nonatomic, copy) NSString *extInfo;
 
 /** extData数据
  * @note
  */
-@property (nonatomic, strong, nullable) NSData *extData;
+@property(nullable, nonatomic, strong) NSData *extData;
 @end
 
 
@@ -1213,11 +1213,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /** 业务类型
  */
-@property (nonatomic, copy) NSString *businessType;
+@property(nonatomic, copy) NSString *businessType;
 
 /** 业务返回数据
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 
 @end
 
@@ -1228,11 +1228,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /**企微客服发起流程 url
  */
-@property (nonatomic, copy, nullable) NSString *url;
+@property(nullable, nonatomic, copy) NSString *url;
 
 /**企业 id
  */
-@property (nonatomic, copy, nullable) NSString *corpid;
+@property(nullable, nonatomic, copy) NSString *corpid;
 
 @end
 
@@ -1240,7 +1240,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /** 业务返回数据
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 
 @end
 
@@ -1253,7 +1253,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /** 必填，直播业务数据（json格式）
  */
-@property (nonatomic, copy) NSString *liveJsonInfo;
+@property(nonatomic, copy) NSString *liveJsonInfo;
 
 @end
 
@@ -1261,7 +1261,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 /** 业务返回数据
  */
-@property (nonatomic, copy, nullable) NSString *extMsg;
+@property(nullable, nonatomic, copy) NSString *extMsg;
 
 @end
 

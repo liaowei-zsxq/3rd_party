@@ -34,7 +34,7 @@ enum  AuthErrCode {
     __weak id<WechatAuthAPIDelegate> _delegate;
 }
 
-@property(nonatomic, weak, nullable) id<WechatAuthAPIDelegate> delegate;
+@property(nullable, nonatomic, weak) id<WechatAuthAPIDelegate> delegate;
 @property(nonatomic, readonly) NSString *sdkVersion;   //authSDK版本号
 
 /*! @brief 发送登录请求，等待WechatAuthAPIDelegate回调
