@@ -29,7 +29,7 @@ enum  AuthErrCode {
 
 @end
 
-@interface WechatAuthSDK : NSObject{
+@interface WechatAuthSDK: NSObject{
     NSString *_sdkVersion;
     __weak id<WechatAuthAPIDelegate> _delegate;
 }

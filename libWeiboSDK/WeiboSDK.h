@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode) {
 /**
  微博SDK接口类
  */
-@interface WeiboSDK : NSObject
+@interface WeiboSDK: NSObject
 
 /**
  检查用户是否安装了微博客户端程序
@@ -204,7 +204,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  微博客户端程序和第三方应用之间传输数据信息的基类
  */
-@interface WBDataTransferObject : NSObject
+@interface WBDataTransferObject: NSObject
 
 /**
  自定义信息字典，用于数据传输过程中存储相关的上下文环境数据
@@ -235,7 +235,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  微博SDK所有请求类的基类
  */
-@interface WBBaseRequest : WBDataTransferObject
+@interface WBBaseRequest: WBDataTransferObject
 
 /**
  返回一个 WBBaseRequest 对象
@@ -249,7 +249,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  微博SDK所有响应类的基类
  */
-@interface WBBaseResponse : WBDataTransferObject
+@interface WBBaseResponse: WBDataTransferObject
 
 /**
  对应的 request 中的自定义信息字典
@@ -284,7 +284,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
  第三方应用向微博客户端申请认证时，需要调用 [WeiboSDK sendRequest:] 函数， 向微博客户端发送一个 WBAuthorizeRequest 的消息结构。
  微博客户端处理完后会向第三方应用发送一个结构为 WBAuthorizeResponse 的处理结果。
  */
-@interface WBAuthorizeRequest : WBBaseRequest
+@interface WBAuthorizeRequest: WBBaseRequest
 
 /**
  微博开放平台第三方应用授权回调页地址，默认为`http://`
@@ -294,7 +294,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
  @warning 必须保证和在微博开放平台应用管理界面配置的“授权回调页”地址一致，如未进行配置则默认为`http://`
  @warning 不能为空，长度小于1K
  */
-@property(nonatomic) NSString *redirectURI;
+@property(nonatomic, copy) NSString *redirectURI;
 
 /**
  微博开放平台第三方应用scope，多个scrope用逗号分隔
@@ -303,7 +303,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
  
  @warning 长度小于1K
  */
-@property(nonatomic) NSString *scope;
+@property(nonatomic, copy) NSString *scope;
 
 /**
  当用户没有安装微博客户端或微博客户端过低无法支持SSO的时候是否弹出SDK自带的Webview进行授权
@@ -323,17 +323,17 @@ extern NSString *const WeiboSDKGetAidFailNotification;
  
  WBAuthorizeResponse 结构中仅包含常用的 userID 、accessToken 和 expirationDate 信息，其他的认证信息（比如部分应用可以获取的 refresh_token 信息）会统一存放到 userInfo 中
  */
-@interface WBAuthorizeResponse : WBBaseResponse
+@interface WBAuthorizeResponse: WBBaseResponse
 
 /**
  用户ID
  */
-@property(nonatomic) NSString *userID;
+@property(nonatomic, copy) NSString *userID;
 
 /**
  认证口令
  */
-@property(nonatomic) NSString *accessToken;
+@property(nonatomic, copy) NSString *accessToken;
 
 /**
  认证过期时间
@@ -343,7 +343,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  当认证口令过期时用于换取认证口令的更新口令
  */
-@property(nonatomic) NSString *refreshToken;
+@property(nonatomic, copy) NSString *refreshToken;
 
 @end
 
@@ -352,14 +352,14 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  微博客户端向第三方程序请求提供内容的消息结构
  */
-@interface WBProvideMessageForWeiboRequest : WBBaseRequest
+@interface WBProvideMessageForWeiboRequest: WBBaseRequest
 
 @end
 
 /**
  微博客户端向第三方应用请求提供内容，第三方应用向微博客户端返回的消息结构
  */
-@interface WBProvideMessageForWeiboResponse : WBBaseResponse
+@interface WBProvideMessageForWeiboResponse: WBBaseResponse
 
 /**
  提供给微博客户端的消息
@@ -380,7 +380,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  第三方应用发送消息至微博客户端程序的消息结构体
  */
-@interface WBSendMessageToWeiboRequest : WBBaseRequest
+@interface WBSendMessageToWeiboRequest: WBBaseRequest
 
 /**
  发送给微博客户端的消息
@@ -416,7 +416,7 @@ extern NSString *const WeiboSDKGetAidFailNotification;
 /**
  WBSendMessageToWeiboResponse
  */
-@interface WBSendMessageToWeiboResponse : WBBaseResponse
+@interface WBSendMessageToWeiboResponse: WBBaseResponse
 
 /**
  可能在分享过程中用户进行了授权操作，当此值不为空时，为用户相应授权信息
@@ -431,14 +431,14 @@ extern NSString *const WeiboSDKGetAidFailNotification;
  
  一个消息结构由三部分组成：文字、图片和多媒体数据。三部分内容中至少有一项不为空，图片和多媒体数据不能共存。(新版的多图和视频属于图片数据，并且图片和视频也不能共存)
  */
-@interface WBMessageObject : NSObject
+@interface WBMessageObject: NSObject
 
 /**
  消息的文本内容
  
  @warning 长度小于2000个汉字
  */
-@property(nonatomic) NSString *text;
+@property(nonatomic, copy) NSString *text;
 
 /**
  消息的图片内容
@@ -499,7 +499,7 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
 /**
  消息中包含的图片数据对象
  */
-@interface WBImageObject : NSObject
+@interface WBImageObject: NSObject
 
 /**
  图片真实数据内容，图片数据与图片数组finalAssetArray只能存在一项，图片数据不能为空并且大小不能超过10M,
@@ -550,7 +550,7 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
 
 @end
 
-@interface WBNewVideoObject : NSObject
+@interface WBNewVideoObject: NSObject
 
 /**
  返回一个 WBNewVideoObject 对象
@@ -591,7 +591,7 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
 /**
  消息中包含的多媒体数据对象基类,该类后期会被废弃,在发布器不再显示为linkcard样式,只显示为普通网络连接
  */
-@interface WBBaseMediaObject : NSObject
+@interface WBBaseMediaObject: NSObject
 
 /**
  对象唯一ID，用于唯一标识一个多媒体内容
@@ -599,19 +599,19 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
  当第三方应用分享多媒体内容到微博时，应该将此参数设置为被分享的内容在自己的系统中的唯一标识
  @warning 不能为空，长度小于255
  */
-@property(nonatomic) NSString *objectID;
+@property(nonatomic, copy) NSString *objectID;
 
 /**
  多媒体内容标题
  @warning 不能为空且长度小于1k
  */
-@property(nonatomic) NSString *title;
+@property(nonatomic, copy) NSString *title;
 
 /**
  多媒体内容描述
  @warning 长度小于1k
  */
-@property(nonatomic) NSString *description;
+@property(nonatomic, copy) NSString *description;
 
 /**
  多媒体内容缩略图
@@ -623,7 +623,7 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
  点击多媒体内容之后呼起第三方应用特定页面的scheme
  @warning 长度小于255
  */
-@property(nonatomic) NSString *scheme;
+@property(nonatomic, copy) NSString *scheme;
 
 /**
  返回一个 WBBaseMediaObject 对象
@@ -639,13 +639,13 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode) {
 /**
  消息中包含的网页数据对象
  */
-@interface WBWebpageObject : WBBaseMediaObject
+@interface WBWebpageObject: WBBaseMediaObject
 
 /**
  网页的url地址
  
  @warning 不能为空且长度不能超过255
  */
-@property(nonatomic) NSString *webpageUrl;
+@property(nonatomic, copy) NSString *webpageUrl;
 
 @end

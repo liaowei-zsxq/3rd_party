@@ -63,7 +63,7 @@
  微博封装Http请求的消息结构
  
  */
-@interface WBHttpRequest : NSObject {
+@interface WBHttpRequest: NSObject {
     NSURLConnection *connection;
     NSMutableData *responseData;
 }
@@ -71,14 +71,14 @@
 /**
  用户自定义请求地址URL
  */
-@property(nonatomic) NSString *url;
+@property(nonatomic, copy) NSString *url;
 
 /**
  用户自定义请求方式
  
  支持"GET" "POST"
  */
-@property(nonatomic) NSString *httpMethod;
+@property(nonatomic, copy) NSString *httpMethod;
 
 /**
  用户自定义请求参数字典
@@ -95,7 +95,7 @@
  
  用于区分回调Request
  */
-@property(nonatomic) NSString *tag;
+@property(nonatomic, copy) NSString *tag;
 
 /**
  统一HTTP请求接口

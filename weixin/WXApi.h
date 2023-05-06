@@ -70,7 +70,7 @@ typedef BOOL(^WXGrantReadPasteBoardPermissionCompletion)(void);
  *
  * 该类封装了微信终端SDK的所有接口
  */
-@interface WXApi : NSObject
+@interface WXApi: NSObject
 
 /*! @brief WXApi的成员函数，向微信终端程序注册第三方应用。
  *

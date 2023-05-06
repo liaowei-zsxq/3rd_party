@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, WXULCheckStep)
 /*! @brief 该类为微信Universal Link检测函数结果类
 *
 */
-@interface WXCheckULStepResult : NSObject
+@interface WXCheckULStepResult: NSObject
 
 /** 是否成功 */
 @property(nonatomic, assign) BOOL success;
@@ -134,7 +134,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /*! @brief 该类为微信终端SDK所有请求类的基类
  *
  */
-@interface BaseReq : NSObject
+@interface BaseReq: NSObject
 
 /** 请求类型 */
 @property(nonatomic, assign) int type;
@@ -149,7 +149,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /*! @brief 该类为微信终端SDK所有响应类的基类
  *
  */
-@interface BaseResp : NSObject
+@interface BaseResp: NSObject
 /** 错误码 */
 @property(nonatomic, assign) int errCode;
 /** 错误提示字符串 */
@@ -172,7 +172,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 向微信终端发送一个SendAuthReq消息结构。微信终端处理完后会向第三方程序发送一个处理结果。
  * @see SendAuthResp
  */
-@interface SendAuthReq : BaseReq
+@interface SendAuthReq: BaseReq
 /** 第三方程序要向微信申请认证，并请求某些权限，需要调用WXApi的sendReq成员函数，向微信终端发送一个SendAuthReq消息结构。微信终端处理完后会向第三方程序发送一个处理结果。
  * @see SendAuthResp
  * @note scope字符串长度不能超过1K
@@ -201,7 +201,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端处理完后会向第三方程序发送一个SendAuthResp。
  * @see onResp
  */
-@interface SendAuthResp : BaseResp
+@interface SendAuthResp: BaseResp
 @property(nullable, nonatomic, copy) NSString *code;
 /** 第三方程序发送时用来标识其请求的唯一性的标志，由第三方程序调用sendReq时传入，由微信终端回传
  * @note state字符串长度不能超过1K
@@ -214,14 +214,14 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 #pragma mark - WXStateJumpInfo
 /*! @brief 状态发表时的小尾巴跳转信息
  */
-@interface WXStateJumpInfo : NSObject
+@interface WXStateJumpInfo: NSObject
 
 @end
 
 #pragma mark - WXStateJumpUrlInfo
 /*! @brief 状态小尾巴跳转指定url的信息
  */
-@interface WXStateJumpUrlInfo : WXStateJumpInfo
+@interface WXStateJumpUrlInfo: WXStateJumpInfo
 /** 跳转到指定的url
  * @note 必填，url长度必须大于0且小于10K
  */
@@ -232,7 +232,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 #pragma mark - WXStateJumpWXMiniProgramInfo
 /*! @brief 状态小尾巴跳转指定小程序的信息
  */
-@interface WXStateJumpMiniProgramInfo : WXStateJumpInfo
+@interface WXStateJumpMiniProgramInfo: WXStateJumpInfo
 /** 小程序username
  * @note 必填
  */
@@ -255,7 +255,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 #pragma mark - WXStateJumpWXMiniProgramInfo
 /*! @brief 状态小尾巴跳转指定视频号主页信息
  */
-@interface WXStateJumpChannelProfileInfo : WXStateJumpInfo
+@interface WXStateJumpChannelProfileInfo: WXStateJumpInfo
 /** 视频号username
  * @note 必填，username长度必须大于0且小于1K
  */
@@ -267,7 +267,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 #pragma mark - WXStateSceneDataObject
 /*! @brief 场景类型额外参数基类
  */
-@interface WXSceneDataObject : NSObject
+@interface WXSceneDataObject: NSObject
 
 @end
 
@@ -275,7 +275,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /*! @brief 状态场景类型
  * 用户填写WXStateSceneDataObject参数后，可以跳转到微信状态发表页
  */
-@interface WXStateSceneDataObject : WXSceneDataObject
+@interface WXStateSceneDataObject: WXSceneDataObject
 
 /** 状态标志的ID
  * @note 选填，文本长度必须小于10K
@@ -303,7 +303,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 分别对应于text和message成员。调用该方法后，微信处理完信息会向第三方程序发送一个处理结果。
  * @see SendMessageToWXResp
  */
-@interface SendMessageToWXReq : BaseReq
+@interface SendMessageToWXReq: BaseReq
 /** 发送消息的文本内容
  * @note 文本长度必须大于0且小于10K
  */
@@ -334,7 +334,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方程序向微信终端发送SendMessageToWXReq后，微信发送回来的处理结果，该结果用SendMessageToWXResp表示。
  */
-@interface SendMessageToWXResp : BaseResp
+@interface SendMessageToWXResp: BaseResp
 @property(nonatomic, copy) NSString *lang;
 @property(nonatomic, copy) NSString *country;
 @end
@@ -345,7 +345,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端向第三方程序请求提供内容，微信终端会向第三方程序发送GetMessageFromWXReq消息结构体，
  * 需要第三方程序调用sendResp返回一个GetMessageFromWXResp消息结构体。
  */
-@interface GetMessageFromWXReq : BaseReq
+@interface GetMessageFromWXReq: BaseReq
 @property(nonatomic, strong) NSString *lang;
 @property(nonatomic, strong) NSString *country;
 @end
@@ -357,7 +357,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 微信终端向第三方程序请求提供内容，第三方程序调用sendResp向微信终端返回一个GetMessageFromWXResp消息结构体。
  */
-@interface GetMessageFromWXResp : BaseResp
+@interface GetMessageFromWXResp: BaseResp
 /** 向微信终端提供的文本内容
  @note 文本长度必须大于0且小于10K
  */
@@ -378,7 +378,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信需要通知第三方程序显示或处理某些内容时，会向第三方程序发送ShowMessageFromWXReq消息结构体。
  * 第三方程序处理完内容后调用sendResp向微信终端发送ShowMessageFromWXResp。
  */
-@interface ShowMessageFromWXReq : BaseReq
+@interface ShowMessageFromWXReq: BaseReq
 /** 微信终端向第三方程序发送的要求第三方程序处理的多媒体内容
  * @see WXMediaMessage
  */
@@ -395,7 +395,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信需要通知第三方程序显示或处理某些内容时，会向第三方程序发送ShowMessageFromWXReq消息结构体。
  * 第三方程序处理完内容后调用sendResp向微信终端发送ShowMessageFromWXResp。
  */
-@interface ShowMessageFromWXResp : BaseResp
+@interface ShowMessageFromWXResp: BaseResp
 @end
 
 
@@ -404,7 +404,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  *  微信向第三方发送的结构体，第三方不需要返回
  */
-@interface LaunchFromWXReq : BaseReq
+@interface LaunchFromWXReq: BaseReq
 @property(nonatomic, strong) WXMediaMessage *message;
 @property(nonatomic, copy) NSString *lang;
 @property(nonatomic, copy) NSString *country;
@@ -416,7 +416,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  *  第三方通知微信启动内部浏览器，打开指定Url对应的网页
  */
-@interface OpenWebviewReq : BaseReq
+@interface OpenWebviewReq: BaseReq
 /** 需要打开的网页对应的Url
  * @attention 长度不能超过1024
  */
@@ -429,7 +429,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方程序向微信终端发送OpenWebviewReq后，微信发送回来的处理结果，该结果用OpenWebviewResp表示
  */
-@interface OpenWebviewResp : BaseResp
+@interface OpenWebviewResp: BaseResp
 
 @end
 
@@ -440,7 +440,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  *
  */
-@interface WXOpenBusinessWebViewReq : BaseReq
+@interface WXOpenBusinessWebViewReq: BaseReq
 
 /** 网页业务类型
  * @attention
@@ -459,7 +459,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方程序向微信终端发送WXOpenBusinessWebViewReq后，微信发送回来的处理结果，该结果用WXOpenBusinessWebViewResp表示。
  */
-@interface WXOpenBusinessWebViewResp : BaseResp
+@interface WXOpenBusinessWebViewResp: BaseResp
 /** 第三方程序自定义简单数据，微信终端会回传给第三方程序处理
  * @attention 长度不能超过2k
  */
@@ -478,7 +478,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方通知微信，打开硬件排行榜
  */
-@interface OpenRankListReq : BaseReq
+@interface OpenRankListReq: BaseReq
 
 @end
 
@@ -487,14 +487,14 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方程序向微信终端发送OpenRankListReq后，微信发送回来的处理结果，该结果用OpenRankListResp表示。
  */
-@interface OpenRankListResp : BaseResp
+@interface OpenRankListResp: BaseResp
 
 @end
 
 
 #pragma mark - WXCardItem
 
-@interface WXCardItem : NSObject
+@interface WXCardItem: NSObject
 /** 卡id
  * @attention 长度不能超过1024字节
  */
@@ -519,7 +519,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXInvoiceItem
 
-@interface WXInvoiceItem : NSObject
+@interface WXInvoiceItem: NSObject
 /** 卡id
  * @attention 长度不能超过1024字节
  */
@@ -548,7 +548,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 
-@interface AddCardToWXCardPackageReq : BaseReq
+@interface AddCardToWXCardPackageReq: BaseReq
 /** 卡列表
  * @attention 个数不能超过40个 类型WXCardItem
  */
@@ -562,7 +562,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 
-@interface AddCardToWXCardPackageResp : BaseResp
+@interface AddCardToWXCardPackageResp: BaseResp
 /** 卡列表
  * @attention 个数不能超过40个 类型WXCardItem
  */
@@ -574,7 +574,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 
-@interface WXChooseCardReq : BaseReq
+@interface WXChooseCardReq: BaseReq
 @property(nonatomic, copy) NSString *appID;
 @property(nonatomic, assign) UInt32 shopID;
 @property(nonatomic, assign) UInt32 canMultiSelect;
@@ -592,7 +592,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  */
 
-@interface WXChooseCardResp : BaseResp
+@interface WXChooseCardResp: BaseResp
 @property(nonatomic, strong ) NSArray* cardAry;
 @end
 
@@ -601,7 +601,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /* ! @brief 请求从微信选取发票
  *
  */
-@interface WXChooseInvoiceReq : BaseReq
+@interface WXChooseInvoiceReq: BaseReq
 @property(nonatomic, copy) NSString *appID;
 @property(nonatomic, assign) UInt32 shopID;
 @property(nonatomic, copy) NSString *signType;
@@ -614,19 +614,19 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** ! @brief 微信返回第三方请求选择发票结果
  *
  */
-@interface WXChooseInvoiceResp : BaseResp
+@interface WXChooseInvoiceResp: BaseResp
 @property(nonatomic, strong) NSArray* cardAry;
 @end
 
 #pragma mark - WXSubscriptionReq
-@interface WXSubscribeMsgReq : BaseReq
+@interface WXSubscribeMsgReq: BaseReq
 @property(nonatomic, assign) UInt32 scene;
 @property(nonatomic, copy) NSString *templateId;
 @property(nullable, nonatomic, copy) NSString *reserved;
 @end
 
 #pragma mark - WXSubscriptionReq
-@interface WXSubscribeMsgResp : BaseResp
+@interface WXSubscribeMsgResp: BaseResp
 
 @property(nonatomic, copy) NSString *templateId;
 @property(nonatomic, assign) UInt32 scene;
@@ -640,12 +640,12 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 /** ! @brief 第三方请求订阅小程序消息
  *
  */
-@interface WXSubscribeMiniProgramMsgReq : BaseReq
+@interface WXSubscribeMiniProgramMsgReq: BaseReq
 @property(nonatomic, copy) NSString *miniProgramAppid;
 @end
 
 #pragma mark - WXSubscriptionReq
-@interface WXSubscribeMiniProgramMsgResp : BaseResp
+@interface WXSubscribeMiniProgramMsgResp: BaseResp
 
 @property(nonatomic, copy) NSString *openId;   // 小程序openid
 @property(nonatomic, copy) NSString *unionId;  // unionId
@@ -654,7 +654,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @end
 
 #pragma mark - WXinvoiceAuthInsertReq
-@interface WXInvoiceAuthInsertReq : BaseReq
+@interface WXInvoiceAuthInsertReq: BaseReq
 
 @property(nonatomic, copy) NSString *urlString;
 
@@ -662,7 +662,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXinvoiceAuthInsertResp
 
-@interface WXInvoiceAuthInsertResp : BaseResp
+@interface WXInvoiceAuthInsertResp: BaseResp
 
 @property(nonatomic, copy) NSString *wxOrderId;
 
@@ -674,7 +674,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 用于微信终端和第三方程序之间传递消息的多媒体消息内容
  */
-@interface WXMediaMessage : NSObject
+@interface WXMediaMessage: NSObject
 
 + (WXMediaMessage *)message;
 
@@ -733,7 +733,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note imageData成员不能为空
  * @see WXMediaMessage
  */
-@interface WXImageObject : NSObject
+@interface WXImageObject: NSObject
 /*! @brief 返回一个WXImageObject对象
  *
  * @note 返回的WXImageObject对象是自动释放的
@@ -760,7 +760,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note musicUrl和musicLowBandUrl成员不能同时为空。
  * @see WXMediaMessage
  */
-@interface WXMusicObject : NSObject
+@interface WXMusicObject: NSObject
 /*! @brief 返回一个WXMusicObject对象
  *
  * @note 返回的WXMusicObject对象是自动释放的
@@ -800,7 +800,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXMusicVideoObject
 
-@interface WXMusicVipInfo : NSObject
+@interface WXMusicVipInfo: NSObject
 
 /**付费歌曲的id
  * @note 长度不能超过32K
@@ -810,7 +810,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @end
 
 
-@interface WXMusicVideoObject : NSObject
+@interface WXMusicVideoObject: NSObject
 
 /*! @brief 返回一个WXMusicVideoObject对象
  *
@@ -894,7 +894,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note videoUrl和videoLowBandUrl不能同时为空。
  * @see WXMediaMessage
  */
-@interface WXVideoObject : NSObject
+@interface WXVideoObject: NSObject
 /*! @brief 返回一个WXVideoObject对象
  *
  * @note 返回的WXVideoObject对象是自动释放的
@@ -920,7 +920,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端和第三方程序之间传递消息中包含的网页数据对象。
  * @see WXMediaMessage
  */
-@interface WXWebpageObject : NSObject
+@interface WXWebpageObject: NSObject
 /*! @brief 返回一个WXWebpageObject对象
  *
  * @note 返回的WXWebpageObject对象是自动释放的
@@ -951,7 +951,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note url，extInfo和fileData不能同时为空
  * @see WXMediaMessage
  */
-@interface WXAppExtendObject : NSObject
+@interface WXAppExtendObject: NSObject
 /*! @brief 返回一个WXAppExtendObject对象
  *
  * @note 返回的WXAppExtendObject对象是自动释放的
@@ -981,7 +981,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端和第三方程序之间传递消息中包含的表情数据对象。
  * @see WXMediaMessage
  */
-@interface WXEmoticonObject : NSObject
+@interface WXEmoticonObject: NSObject
 
 /*! @brief 返回一个WXEmoticonObject对象
  *
@@ -1003,7 +1003,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * @see WXMediaMessage
  */
-@interface WXFileObject : NSObject
+@interface WXFileObject: NSObject
 
 /*! @brief 返回一个WXFileObject对象
  *
@@ -1030,7 +1030,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端和第三方程序之间传递消息中包含的地理位置数据对象。
  * @see WXMediaMessage
  */
-@interface WXLocationObject : NSObject
+@interface WXLocationObject: NSObject
 
 /*! @brief 返回一个WXLocationObject对象
  *
@@ -1052,7 +1052,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * 微信终端和第三方程序之间传递消息中包含的文本数据对象。
  * @see WXMediaMessage
  */
-@interface WXTextObject : NSObject
+@interface WXTextObject: NSObject
 
 /*! @brief 返回一个WXTextObject对象
  *
@@ -1069,7 +1069,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXMiniProgramObject
 
-@interface WXMiniProgramObject : NSObject
+@interface WXMiniProgramObject: NSObject
 
 /*! @brief WXMiniProgramObject对象
  *
@@ -1123,7 +1123,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 游戏直播消息类型
  */
 
-@interface WXGameLiveObject : NSObject
+@interface WXGameLiveObject: NSObject
 
 + (WXGameLiveObject *)object;
 
@@ -1138,7 +1138,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * @note 返回的WXLaunchMiniProgramReq对象是自动释放的
  */
-@interface WXLaunchMiniProgramReq : BaseReq
+@interface WXLaunchMiniProgramReq: BaseReq
 
 + (WXLaunchMiniProgramReq *)object;
 
@@ -1172,7 +1172,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  *
  * 第三方程序向微信终端发送WXLaunchMiniProgramReq后，微信发送回来的处理结果，该结果用WXLaunchMiniProgramResp表示。
  */
-@interface WXLaunchMiniProgramResp : BaseResp
+@interface WXLaunchMiniProgramResp: BaseResp
 
 @property(nullable, nonatomic, copy) NSString *extMsg;
 
@@ -1185,7 +1185,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 返回的WXOpenBusinessViewReq对象是自动释放的
  */
 
-@interface WXOpenBusinessViewReq : BaseReq
+@interface WXOpenBusinessViewReq: BaseReq
 
 + (WXOpenBusinessViewReq *)object;
 
@@ -1209,7 +1209,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @end
 
 
-@interface WXOpenBusinessViewResp : BaseResp
+@interface WXOpenBusinessViewResp: BaseResp
 
 /** 业务类型
  */
@@ -1222,7 +1222,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @end
 
 #pragma mark - WXOpenCustomerServiceReq
-@interface WXOpenCustomerServiceReq : BaseReq
+@interface WXOpenCustomerServiceReq: BaseReq
 
 + (WXOpenCustomerServiceReq *)object;
 
@@ -1236,7 +1236,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 @end
 
-@interface WXOpenCustomerServiceResp : BaseResp
+@interface WXOpenCustomerServiceResp: BaseResp
 
 /** 业务返回数据
  */
@@ -1247,7 +1247,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXChannelStartLiveReq
 
-@interface WXChannelStartLiveReq : BaseReq
+@interface WXChannelStartLiveReq: BaseReq
 
 + (WXChannelStartLiveReq *)object;
 
@@ -1257,7 +1257,7 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 @end
 
-@interface WXChannelStartLiveResp : BaseResp
+@interface WXChannelStartLiveResp: BaseResp
 
 /** 业务返回数据
  */
