@@ -63,7 +63,7 @@
  微博封装Http请求的消息结构
  
  */
-@interface WBHttpRequest: NSObject {
+@interface WBHttpRequest : NSObject {
     NSURLConnection *connection;
     NSMutableData *responseData;
 }

@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 /*!
  * 通知注册实体类
  */
-@interface JPUSHRegisterEntity: NSObject
+@interface JPUSHRegisterEntity : NSObject
 
 /*!
  * 支持的类型
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 /*!
  * 进行删除、查找推送实体类
  */
-@interface JPushNotificationIdentifier: NSObject<NSCopying, NSCoding>
+@interface JPushNotificationIdentifier : NSObject <NSCopying, NSCoding>
 
 @property(nonatomic, copy) NSArray<NSString *> *identifiers; // 推送的标识数组
 @property(nonatomic, copy) UILocalNotification *notificationObj NS_DEPRECATED_IOS(4_0, 10_0);  // iOS10以下可以传UILocalNotification对象数据，iOS10以上无效
@@ -95,7 +95,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  * 推送通知声音实体类
  * iOS10以上有效
  */
-@interface JPushNotificationSound: NSObject<NSCopying, NSCoding>
+@interface JPushNotificationSound : NSObject <NSCopying, NSCoding>
 @property(nonatomic, copy) NSString *soundName; //普通通知铃声
 @property(nonatomic, copy) NSString *criticalSoundName NS_AVAILABLE_IOS(12.0); //警告通知铃声
 @property(nonatomic, assign) float criticalSoundVolume NS_AVAILABLE_IOS(12.0); //警告通知铃声音量，有效值在0~1之间，默认为1
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 /*!
  * 推送内容实体类
  */
-@interface JPushNotificationContent: NSObject<NSCopying, NSCoding>
+@interface JPushNotificationContent : NSObject <NSCopying, NSCoding>
 
 @property(nonatomic, copy) NSString *title;                // 推送标题
 @property(nonatomic, copy) NSString *subtitle;             // 推送副标题
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  * 推送触发方式实体类
  * 注：dateComponents、timeInterval、region在iOS10以上可选择其中一个参数传入有效值，如果同时传入值会根据优先级I、II、III使其中一种触发方式生效，fireDate为iOS10以下根据时间触发时须传入的参数
  */
-@interface JPushNotificationTrigger: NSObject<NSCopying, NSCoding>
+@interface JPushNotificationTrigger : NSObject <NSCopying, NSCoding>
 
 @property(nonatomic, assign) BOOL repeat;                  // 设置是否重复，默认为NO
 @property(nonatomic, copy) NSDate *fireDate NS_DEPRECATED_IOS(2_0, 10_0);           // 用来设置触发推送的时间，iOS10以上无效
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 /*!
  * 注册或更新推送实体类
  */
-@interface JPushNotificationRequest: NSObject<NSCopying, NSCoding>
+@interface JPushNotificationRequest : NSObject <NSCopying, NSCoding>
 
 @property(nonatomic, copy) NSString *requestIdentifier;    // 推送请求标识
 @property(nonatomic, copy) JPushNotificationContent *content; // 设置推送的具体内容
@@ -162,7 +162,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 /*!
  * JPush 核心头文件
  */
-@interface JPUSHService: NSObject
+@interface JPUSHService : NSObject
 
 
 ///----------------------------------------------------

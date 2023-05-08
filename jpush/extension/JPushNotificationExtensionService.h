@@ -15,7 +15,7 @@
 
 @class UNNotificationRequest;
 
-@interface JPushNotificationExtensionService: NSObject
+@interface JPushNotificationExtensionService : NSObject
 
 
 /**

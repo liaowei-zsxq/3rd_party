@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, Sample_Rate) {
     Sample_Rate_44100 = 2,  //44K
 };
 
-@interface VoiceConverter: NSObject
+@interface VoiceConverter : NSObject
 
 /**
  *  转换wav到amr
