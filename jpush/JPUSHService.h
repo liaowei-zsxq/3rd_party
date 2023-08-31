@@ -13,6 +13,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CLRegion;
 @class UILocalNotification;
 @class CLLocation;
@@ -937,3 +939,4 @@ callbackSelector:(SEL)cbSelector
 
 @end
 
+NS_ASSUME_NONNULL_END
