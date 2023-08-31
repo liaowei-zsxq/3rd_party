@@ -9,7 +9,7 @@
  * Copyright (c) 2011 ~ 2017 Shenzhen HXHG. All rights reserved.
  */
 
-#define JPUSH_VERSION_NUMBER 4.9.0
+#define JPUSH_VERSION_NUMBER 5.0.0
 
 #import <Foundation/Foundation.h>
 
@@ -24,8 +24,7 @@
 @protocol JPUSHRegisterDelegate;
 @protocol JPUSHGeofenceDelegate;
 @protocol JPUSHNotiInMessageDelegate;
-
-NS_ASSUME_NONNULL_BEGIN
+@protocol JPUSHInAppMessageDelegate;
 
 typedef void (^JPUSHTagsOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq);
 typedef void (^JPUSHTagValidOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind);
@@ -70,24 +69,24 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  * 支持的类型
  * badge,sound,alert
  */
-@property(nonatomic, assign) NSInteger types;
+@property (nonatomic, assign) NSInteger types;
 /*!
  * 注入的类别
  * iOS10 UNNotificationCategory
  * iOS8-iOS9 UIUserNotificationCategory
  */
-@property(nonatomic, strong) NSSet *categories;
+@property (nonatomic, strong) NSSet *categories;
 @end
 
 /*!
  * 进行删除、查找推送实体类
  */
-@interface JPushNotificationIdentifier : NSObject <NSCopying, NSCoding>
+@interface JPushNotificationIdentifier : NSObject<NSCopying, NSCoding>
 
-@property(nonatomic, copy) NSArray<NSString *> *identifiers; // 推送的标识数组
-@property(nonatomic, copy) UILocalNotification *notificationObj NS_DEPRECATED_IOS(4_0, 10_0);  // iOS10以下可以传UILocalNotification对象数据，iOS10以上无效
-@property(nonatomic, assign) BOOL delivered NS_AVAILABLE_IOS(10_0); // 在通知中心显示的或待推送的标志，默认为NO，YES表示在通知中心显示的，NO表示待推送的
-@property(nonatomic, copy) void (^findCompletionHandler)(NSArray *results); // 用于查询回调，调用[findNotification:]方法前必须设置，results为返回相应对象数组，iOS10以下返回UILocalNotification对象数组；iOS10以上根据delivered传入值返回UNNotification或UNNotificationRequest对象数组（delivered传入YES，则返回UNNotification对象数组，否则返回UNNotificationRequest对象数组）
+@property (nonatomic, copy) NSArray<NSString *> *identifiers; // 推送的标识数组
+@property (nonatomic, copy) UILocalNotification *notificationObj NS_DEPRECATED_IOS(4_0, 10_0);  // iOS10以下可以传UILocalNotification对象数据，iOS10以上无效
+@property (nonatomic, assign) BOOL delivered NS_AVAILABLE_IOS(10_0); // 在通知中心显示的或待推送的标志，默认为NO，YES表示在通知中心显示的，NO表示待推送的
+@property (nonatomic, copy) void (^findCompletionHandler)(NSArray *results); // 用于查询回调，调用[findNotification:]方法前必须设置，results为返回相应对象数组，iOS10以下返回UILocalNotification对象数组；iOS10以上根据delivered传入值返回UNNotification或UNNotificationRequest对象数组（delivered传入YES，则返回UNNotification对象数组，否则返回UNNotificationRequest对象数组）
 
 @end
 
@@ -96,39 +95,39 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  * iOS10以上有效
  */
 @interface JPushNotificationSound : NSObject <NSCopying, NSCoding>
-@property(nonatomic, copy) NSString *soundName; //普通通知铃声
-@property(nonatomic, copy) NSString *criticalSoundName NS_AVAILABLE_IOS(12.0); //警告通知铃声
-@property(nonatomic, assign) float criticalSoundVolume NS_AVAILABLE_IOS(12.0); //警告通知铃声音量，有效值在0~1之间，默认为1
+@property (nonatomic, copy) NSString *soundName; //普通通知铃声
+@property (nonatomic, copy) NSString *criticalSoundName NS_AVAILABLE_IOS(12.0); //警告通知铃声
+@property (nonatomic, assign) float criticalSoundVolume NS_AVAILABLE_IOS(12.0); //警告通知铃声音量，有效值在0~1之间，默认为1
 @end
 
 
 /*!
  * 推送内容实体类
  */
-@interface JPushNotificationContent : NSObject <NSCopying, NSCoding>
+@interface JPushNotificationContent : NSObject<NSCopying, NSCoding>
 
-@property(nonatomic, copy) NSString *title;                // 推送标题
-@property(nonatomic, copy) NSString *subtitle;             // 推送副标题
-@property(nonatomic, copy) NSString *body;                 // 推送内容
-@property(nonatomic, copy) NSNumber *badge;                // 角标的数字。如果不需要改变角标传@(-1)
-@property(nonatomic, copy) NSString *action NS_DEPRECATED_IOS(8_0, 10_0); // 弹框的按钮显示的内容（IOS 8默认为"打开", 其他默认为"启动",iOS10以上无效）
-@property(nonatomic, copy) NSString *categoryIdentifier;   // 行为分类标识
-@property(nonatomic, copy) NSDictionary *userInfo;         // 本地推送时可以设置userInfo来增加附加信息，远程推送时设置的payload推送内容作为此userInfo
-@property(nonatomic, copy) NSString *sound;                // 声音名称，不设置则为默认声音
-@property(nonatomic, copy) JPushNotificationSound *soundSetting NS_AVAILABLE_IOS(10.0);   //推送声音实体
-@property(nonatomic, copy) NSArray *attachments NS_AVAILABLE_IOS(10_0);                 // 附件，iOS10以上有效，需要传入UNNotificationAttachment对象数组类型
-@property(nonatomic, copy) NSString *threadIdentifier NS_AVAILABLE_IOS(10_0); // 线程或与推送请求相关对话的标识，iOS10以上有效，可用来对推送进行分组
-@property(nonatomic, copy) NSString *launchImageName NS_AVAILABLE_IOS(10_0);  // 启动图片名，iOS10以上有效，从推送启动时将会用到
-@property(nonatomic, copy) NSString *summaryArgument NS_AVAILABLE_IOS(12.0);  //插入到通知摘要中的部分参数。iOS12以上有效。
-@property(nonatomic, assign) NSUInteger summaryArgumentCount NS_AVAILABLE_IOS(12.0); //插入到通知摘要中的项目数。iOS12以上有效。
-@property(nonatomic, copy) NSString *targetContentIdentifier NS_AVAILABLE_IOS(13.0);  // An identifier for the content of the notification used by the system to customize the scene to be activated when tapping on a notification.
+@property (nonatomic, copy) NSString *title;                // 推送标题
+@property (nonatomic, copy) NSString *subtitle;             // 推送副标题
+@property (nonatomic, copy) NSString *body;                 // 推送内容
+@property (nonatomic, copy) NSNumber *badge;                // 角标的数字。如果不需要改变角标传@(-1)
+@property (nonatomic, copy) NSString *action NS_DEPRECATED_IOS(8_0, 10_0); // 弹框的按钮显示的内容（IOS 8默认为"打开", 其他默认为"启动",iOS10以上无效）
+@property (nonatomic, copy) NSString *categoryIdentifier;   // 行为分类标识
+@property (nonatomic, copy) NSDictionary *userInfo;         // 本地推送时可以设置userInfo来增加附加信息，远程推送时设置的payload推送内容作为此userInfo
+@property (nonatomic, copy) NSString *sound;                // 声音名称，不设置则为默认声音
+@property (nonatomic, copy) JPushNotificationSound *soundSetting NS_AVAILABLE_IOS(10.0);   //推送声音实体
+@property (nonatomic, copy) NSArray *attachments NS_AVAILABLE_IOS(10_0);                 // 附件，iOS10以上有效，需要传入UNNotificationAttachment对象数组类型
+@property (nonatomic, copy) NSString *threadIdentifier NS_AVAILABLE_IOS(10_0); // 线程或与推送请求相关对话的标识，iOS10以上有效，可用来对推送进行分组
+@property (nonatomic, copy) NSString *launchImageName NS_AVAILABLE_IOS(10_0);  // 启动图片名，iOS10以上有效，从推送启动时将会用到
+@property (nonatomic, copy) NSString *summaryArgument NS_AVAILABLE_IOS(12.0);  //插入到通知摘要中的部分参数。iOS12以上有效。
+@property (nonatomic, assign) NSUInteger summaryArgumentCount NS_AVAILABLE_IOS(12.0); //插入到通知摘要中的项目数。iOS12以上有效。
+@property (nonatomic, copy) NSString *targetContentIdentifier NS_AVAILABLE_IOS(13.0);  // An identifier for the content of the notification used by the system to customize the scene to be activated when tapping on a notification.
 //iOS15以上的新增属性 interruptionLevel为枚举UNNotificationInterruptionLevel
 // The interruption level determines the degree of interruption associated with the notification
-@property(nonatomic, assign) NSUInteger interruptionLevel NS_AVAILABLE_IOS(15.0);
+@property (nonatomic, assign) NSUInteger interruptionLevel NS_AVAILABLE_IOS(15.0);
 // Relevance score determines the sorting for the notification across app notifications. The expected range is between 0.0f and 1.0f.
-@property(nonatomic, assign) double relevanceScore NS_AVAILABLE_IOS(15.0);
+@property (nonatomic, assign) double relevanceScore NS_AVAILABLE_IOS(15.0);
 // iOS16以上的新增属性
-@property(nonatomic, copy) NSString *filterCriteria NS_AVAILABLE_IOS(16.0); // default nil
+@property (nonatomic, copy) NSString *filterCriteria NS_AVAILABLE_IOS(16.0); // default nil
 
 @end
 
@@ -137,25 +136,40 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  * 推送触发方式实体类
  * 注：dateComponents、timeInterval、region在iOS10以上可选择其中一个参数传入有效值，如果同时传入值会根据优先级I、II、III使其中一种触发方式生效，fireDate为iOS10以下根据时间触发时须传入的参数
  */
-@interface JPushNotificationTrigger : NSObject <NSCopying, NSCoding>
+@interface JPushNotificationTrigger : NSObject<NSCopying, NSCoding>
 
-@property(nonatomic, assign) BOOL repeat;                  // 设置是否重复，默认为NO
-@property(nonatomic, copy) NSDate *fireDate NS_DEPRECATED_IOS(2_0, 10_0);           // 用来设置触发推送的时间，iOS10以上无效
-@property(nonatomic, copy) CLRegion *region NS_AVAILABLE_IOS(8_0);                  // 用来设置触发推送的位置，iOS8以上有效，iOS10以上优先级为I，应用需要有允许使用定位的授权
-@property(nonatomic, copy) NSDateComponents *dateComponents NS_AVAILABLE_IOS(10_0); // 用来设置触发推送的日期时间，iOS10以上有效，优先级为II
-@property(nonatomic, assign) NSTimeInterval timeInterval NS_AVAILABLE_IOS(10_0);    // 用来设置触发推送的时间，iOS10以上有效，优先级为III
+@property (nonatomic, assign) BOOL repeat;                  // 设置是否重复，默认为NO
+@property (nonatomic, copy) NSDate *fireDate NS_DEPRECATED_IOS(2_0, 10_0);           // 用来设置触发推送的时间，iOS10以上无效
+@property (nonatomic, copy) CLRegion *region NS_AVAILABLE_IOS(8_0);                  // 用来设置触发推送的位置，iOS8以上有效，iOS10以上优先级为I，应用需要有允许使用定位的授权
+@property (nonatomic, copy) NSDateComponents *dateComponents NS_AVAILABLE_IOS(10_0); // 用来设置触发推送的日期时间，iOS10以上有效，优先级为II
+@property (nonatomic, assign) NSTimeInterval timeInterval NS_AVAILABLE_IOS(10_0);    // 用来设置触发推送的时间，iOS10以上有效，优先级为III
 
 @end
 
 /*!
  * 注册或更新推送实体类
  */
-@interface JPushNotificationRequest : NSObject <NSCopying, NSCoding>
+@interface JPushNotificationRequest : NSObject<NSCopying, NSCoding>
 
-@property(nonatomic, copy) NSString *requestIdentifier;    // 推送请求标识
-@property(nonatomic, copy) JPushNotificationContent *content; // 设置推送的具体内容
-@property(nonatomic, copy) JPushNotificationTrigger *trigger; // 设置推送的触发方式
-@property(nonatomic, copy) void (^completionHandler)(id result); // 注册或更新推送成功回调，iOS10以上成功则result为UNNotificationRequest对象，失败则result为nil;iOS10以下成功result为UILocalNotification对象，失败则result为nil
+@property (nonatomic, copy) NSString *requestIdentifier;    // 推送请求标识
+@property (nonatomic, copy) JPushNotificationContent *content; // 设置推送的具体内容
+@property (nonatomic, copy) JPushNotificationTrigger *trigger; // 设置推送的触发方式
+@property (nonatomic, copy) void (^completionHandler)(id result); // 注册或更新推送成功回调，iOS10以上成功则result为UNNotificationRequest对象，失败则result为nil;iOS10以下成功result为UILocalNotification对象，失败则result为nil
+
+@end
+
+
+/*!
+ * 应用内消息内容实体
+ */
+@interface JPushInAppMessage : NSObject
+
+@property (nonatomic, copy)   NSString *mesageId;    // 消息id
+@property (nonatomic, copy)   NSString *title;       // 标题
+@property (nonatomic, copy)   NSString *content;     // 内容
+@property (nonatomic, strong) NSArray  *target;      // 目标页面
+@property (nonatomic, copy)   NSString *clickAction; // 跳转地址
+@property (nonatomic, strong) NSDictionary *extras;  // 附加字段
 
 @end
 
@@ -202,9 +216,9 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setupWithOption:(NSDictionary *)launchingOption
                  appKey:(NSString *)appKey
-                channel:(nullable NSString *)channel
+                channel:(NSString *)channel
        apsForProduction:(BOOL)isProduction
-  advertisingIdentifier:(nullable NSString *)advertisingId;
+  advertisingIdentifier:(NSString *)advertisingId;
 
 
 ///----------------------------------------------------
@@ -363,7 +377,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)deleteAlias:(nullable JPUSHAliasOperationCompletion)completion
++ (void)deleteAlias:(JPUSHAliasOperationCompletion)completion
                 seq:(NSInteger)seq;
 
 /**
@@ -425,6 +439,42 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)cleanProperties:(JPUSHPropertiesOperationCompletion)completion
                     seq:(NSInteger)seq;
+
+
+/*!
+ * 应用内消息接口
+ * 使用应用内消息需要配置以下两个接口。请在进入页面和离开页面的时候相应地配置。以下两个接口请配套调用。
+ */
+
+/**
+ 进入页面
+ 
+ 请与 + (void)pageLeave:(NSString *)pageName; 方法配套使用
+ 
+ @param pageName 页面名
+ @discussion 使用应用内消息功能，需要配置pageEnterTo:和pageLeave:函数。
+ */
++ (void)pageEnterTo:(NSString *)pageName;
+
+
+/**
+ 离开页面
+ 
+ 请与 + (void)pageEnterTo:(NSString *)pageName;方法配套使用
+ 
+ @param pageName 页面名
+ @discussion 使用应用内消息功能，需要配置pageEnterTo:和pageLeave:函数。
+ */
++ (void)pageLeave:(NSString *)pageName;
+
+
+/*!
+* @abstract 设置应用内消息的代理
+*
+* @discussion 遵守JPUSHInAppMessageDelegate的代理对象
+*
+*/
++ (void)setInAppMessageDelegate:(id<JPUSHInAppMessageDelegate>)inAppMessageDelegate;
 
 
 ///----------------------------------------------------
@@ -719,6 +769,14 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setLocationEanable:(BOOL)isEanble;
 
+/*!
+ * @abstract 设置PUSH开关
+ *
+ * @discussion 关闭PUSH之后，将接收不到极光通知推送、自定义消息推送、liveActivity消息推送，默认是开启。
+ *
+ */
++ (void)setPushEnable:(BOOL)isEnable completion:(void (^)(NSInteger iResCode))completion;
+
 
 /*!
 * @abstract 设置应用内提醒消息的代理
@@ -727,6 +785,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 *
 */
 + (void)setNotiInMessageDelegate:(id<JPUSHNotiInMessageDelegate>)notiInMessageDelegate;
+
 
 
 ///----------------------------------------------------
@@ -857,4 +916,24 @@ callbackSelector:(SEL)cbSelector
 
 @end
 
-NS_ASSUME_NONNULL_END
+
+@protocol JPUSHInAppMessageDelegate <NSObject>
+
+/**
+ 应用内消息展示的回调
+ 
+ @param inAppMessage 应用内消息的内容
+
+ */
+- (void)jPushInAppMessageDidShow:(JPushInAppMessage *)inAppMessage;
+
+/**
+ 应用内消息点击的回调
+ 
+ @param inAppMessage 应用内消息的内容
+
+ */
+- (void)jPushInAppMessageDidClick:(JPushInAppMessage *)inAppMessage;
+
+@end
+
