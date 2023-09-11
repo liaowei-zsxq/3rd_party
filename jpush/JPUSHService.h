@@ -218,9 +218,9 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setupWithOption:(NSDictionary *)launchingOption
                  appKey:(NSString *)appKey
-                channel:(NSString *)channel
+                channel:(NSString *_Nullable)channel
        apsForProduction:(BOOL)isProduction
-  advertisingIdentifier:(NSString *)advertisingId;
+  advertisingIdentifier:(NSString *_Nullable)advertisingId;
 
 
 ///----------------------------------------------------
@@ -309,7 +309,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)addTags:(NSSet<NSString *> *)tags
-     completion:(JPUSHTagsOperationCompletion)completion
+     completion:(JPUSHTagsOperationCompletion _Nullable)completion
             seq:(NSInteger)seq;
 
 /**
@@ -321,7 +321,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)setTags:(NSSet<NSString *> *)tags
-     completion:(JPUSHTagsOperationCompletion)completion
+     completion:(JPUSHTagsOperationCompletion _Nullable)completion
             seq:(NSInteger)seq;
 
 /**
@@ -332,7 +332,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)deleteTags:(NSSet<NSString *> *)tags
-        completion:(JPUSHTagsOperationCompletion)completion
+        completion:(JPUSHTagsOperationCompletion _Nullable)completion
                seq:(NSInteger)seq;
 
 /**
@@ -340,7 +340,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)cleanTags:(JPUSHTagsOperationCompletion)completion
++ (void)cleanTags:(JPUSHTagsOperationCompletion _Nullable)completion
               seq:(NSInteger)seq;
 
 /**
@@ -349,7 +349,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调，请在回调中获取查询结果
  @param seq 请求序列号
  */
-+ (void)getAllTags:(JPUSHTagsOperationCompletion)completion
++ (void)getAllTags:(JPUSHTagsOperationCompletion _Nullable)completion
                seq:(NSInteger)seq;
 
 /**
@@ -359,7 +359,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)validTag:(NSString *)tag
-      completion:(JPUSHTagValidOperationCompletion)completion
+      completion:(JPUSHTagValidOperationCompletion _Nullable)completion
              seq:(NSInteger)seq;
 
 /**
@@ -370,7 +370,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)setAlias:(NSString *)alias
-      completion:(JPUSHAliasOperationCompletion)completion
+      completion:(JPUSHAliasOperationCompletion _Nullable)completion
              seq:(NSInteger)seq;
 
 /**
@@ -379,7 +379,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)deleteAlias:(JPUSHAliasOperationCompletion)completion
++ (void)deleteAlias:(JPUSHAliasOperationCompletion _Nullable)completion
                 seq:(NSInteger)seq;
 
 /**
@@ -388,7 +388,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)getAlias:(JPUSHAliasOperationCompletion)completion
++ (void)getAlias:(JPUSHAliasOperationCompletion _Nullable)completion
              seq:(NSInteger)seq;
 
 
@@ -418,7 +418,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)setProperties:(NSDictionary *)properties
-           completion:(JPUSHPropertiesOperationCompletion)completion
+           completion:(JPUSHPropertiesOperationCompletion _Nullable)completion
                   seq:(NSInteger)seq;
 
 
@@ -430,7 +430,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param seq 请求序列号
  */
 + (void)deleteProperties:(NSSet<NSString *> *)keys
-              completion:(JPUSHPropertiesOperationCompletion)completion
+              completion:(JPUSHPropertiesOperationCompletion _Nullable)completion
                      seq:(NSInteger)seq;
 
 
@@ -439,7 +439,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  @param completion 响应回调
  @param seq 请求序列号
  */
-+ (void)cleanProperties:(JPUSHPropertiesOperationCompletion)completion
++ (void)cleanProperties:(JPUSHPropertiesOperationCompletion _Nullable)completion
                     seq:(NSInteger)seq;
 
 
